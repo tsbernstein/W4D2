@@ -1,7 +1,7 @@
 require_relative "require.rb"
 
 class Board
-    COORDINATES = [[]]
+    COORDINATES = (0...8).to_a.product((0...8).to_a)
     def initialize
         @grid = Array.new(8) { Array.new(8) }
 
@@ -51,18 +51,30 @@ class Board
     end
 
     def empty?(pos)
-        @grid[pos[0]][pos[1]] != NullPiece
+        @grid[pos[0]][pos[1]] == NullPiece
     end 
 
     def [](pos)
         @grid[pos[0]][pos[1]]
     end 
 
+    def []=(pos, piece)
+        @grid[pos[0]][pos[1]] = piece
+    end 
+
+    # def look_at_board(piece, pos)
+    #     @grid[pos[0]][pos[1]] = piece.color
+    # end
+
+    # need to write a catch method so user can re-input move
     def move_piece(start_pos, end_pos)
-        if empty?(start_pos) 
-
-
-
+        piece = self[start_pos]
+        end_piece = self[end_pos]
+        raise ArgumentError.new "No piece at position" if empty?(start_pos)
+        raise ArgumentError.new "Not a valid end position" if !COORDINATES.include?(end_pos)
+        self[end_pos] = piece
+        self[start_pos] = end_piece
+        # self[start_pos] = NullPiece.new(:n, self, start_pos)
     end 
 end
 
