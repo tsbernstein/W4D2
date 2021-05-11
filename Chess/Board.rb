@@ -1,7 +1,11 @@
 require_relative "require.rb"
 
 class Board
+
     COORDINATES = (0...8).to_a.product((0...8).to_a)
+
+    attr_reader :grid
+
     def initialize
         @grid = Array.new(8) { Array.new(8) }
 
@@ -74,9 +78,16 @@ class Board
         raise ArgumentError.new "Not a valid end position" if !COORDINATES.include?(end_pos)
         self[end_pos] = piece
         self[start_pos] = end_piece
-        # self[start_pos] = NullPiece.new(:n, self, start_pos)
+        
+        piece.pos = end_pos
+        end_piece.pos = start_pos
+
     end 
 end
 
 # b = Board.new
+# # p b
+# b.move_piece([6,0], [5,0])
 # p b
+# # p = b.grid[5][0]
+# # puts p.pos
