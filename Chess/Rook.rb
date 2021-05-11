@@ -4,4 +4,5 @@ class Rook < Piece
     def move_dirs
         "horizontal"
     end
+
 end

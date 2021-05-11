@@ -1,3 +1,5 @@
+require_relative "require"
+
 class Piece
     attr_reader :color
     attr_accessor :pos
@@ -10,8 +12,13 @@ class Piece
 
     #go back later
     def empty?
+        @color == "n"
     end
 
-    def valid_moves?
+    def valid_moves
+        COORDINATES
     end
+
+
 end 
+

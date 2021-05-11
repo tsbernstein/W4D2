@@ -1,2 +1,5 @@
 require_relative "Piece.rb"
 require_relative "NullPiece.rb"
+require_relative "Board.rb"
+require_relative "Rook.rb"
+require_relative "Slidable.rb"
