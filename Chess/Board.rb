@@ -82,7 +82,7 @@ class Board
         piece.pos = end_pos
         end_piece.pos = start_pos
 
-    end 
+    end
 end
 
 # b = Board.new
