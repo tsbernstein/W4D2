@@ -1,7 +1,7 @@
 require_relative "require.rb"
 
 class Board
-    COORDINATES = [[]]
+    COORDINATES = (0...8).to_a.product((0...8).to_a)
     def initialize
         @grid = Array.new(8) { Array.new(8) }
 
@@ -48,6 +48,10 @@ class Board
 
     def add_piece(piece, pos)
         @grid[pos[0]][pos[1]] = piece
+    end
+
+    def move_piece(start_pos, end_pos)
+        
     end
 end
 
