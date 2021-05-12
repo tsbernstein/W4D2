@@ -66,6 +66,11 @@ class Board
         @grid[pos[0]][pos[1]] = piece
     end 
 
+    def valid_position?(pos)
+        coordinates = (0...8).to_a.product((0...8).to_a)
+        coordinates.include?(pos)
+    end 
+
     # def look_at_board(piece, pos)
     #     @grid[pos[0]][pos[1]] = piece.color
     # end

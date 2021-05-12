@@ -8,8 +8,8 @@ module Slidable
     ]
 
     DIAG_DIRS = [ 
-        [1, 1],
-        [-1, -1],
+        [1,  1],
+        [-1,-1],
         [1, -1],
         [-1, 1]
     ]
@@ -23,34 +23,39 @@ module Slidable
         DIAG_DIRS
     end 
 
+    
     def moves
-        pos_moves = []
-        if moves_dirs == "horizontal"
-            horizontal_dirs.each do |move|
-                pos = self.pos
-                new_pos = [move[0] + pos[0] , move[1] + pos[1]]
-                pos_moves << [new_pos] if self.valid_moves.include?(new_pos)
-            end 
-
-        elsif
-            moves_dirs == "diagonal"
-            diagonal_dirs
-        else
-            horizontal_dirs + diagonal_dirs
-        end
+        moves = []
+        moves_dirs.each do |move|
+            moves << increment_possible_moves(move[0], move[1])
+        end 
+        moves
     end
 
     def increment_possible_moves(dx, dy)
         pos_moves = []
-        x = pos[1]
-        y = pos[0]
+
+        x = pos[0]  
+        y = pos[1]
+
 
         stop_loop = false
         until !stop_loop
             stop_loop = true
-            break if !self.valid_moves.include?([x, y])
-            break if self.board[x, y].color == self.color
-            if self.board[x, y].empty?
+
+            x += dx
+            y += dy
+
+            break if !valid_moves.include?([x, y])
+            break if board[x, y].color == color
+            if board[x,y].color != color 
+                pos_moves << [x,y]
+                break
+            elsif board[x, y].empty?
+                pos_moves << [x,y]
+            end 
+        end 
+        pos_moves
     end
 end
 

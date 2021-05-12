@@ -10,13 +10,12 @@ class Piece
         @pos = pos
     end 
 
-    #go back later
     def empty?
         @color == "n"
     end
 
     def valid_moves
-        (0...8).to_a.product((0...8).to_a)
+        
     end
 
 
