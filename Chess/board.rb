@@ -20,17 +20,17 @@ class Board
             if i == 0
                 row.each_with_index do |square, j|
                     pos = [i, j]
-                    piece = Rook.new(:w, self, pos) if j == 0 || j == 7
-                    piece = Knight.new(:w, self, pos) if j == 1 || j == 6
-                    piece = Bishop.new(:w, self, pos) if j == 2 || j == 5
-                    piece = Queen.new(:w, self, pos) if j == 3
-                    piece = King.new(:w, self, pos) if j == 4
+                    piece = Rook.new(:white, self, pos) if j == 0 || j == 7
+                    piece = Knight.new(:white, self, pos) if j == 1 || j == 6
+                    piece = Bishop.new(:white, self, pos) if j == 2 || j == 5
+                    piece = Queen.new(:white, self, pos) if j == 3
+                    piece = King.new(:white, self, pos) if j == 4
                     add_piece(piece, pos)
                 end
             elsif i == 1
                 row.each_with_index do |square, j|
                     pos = [i, j]
-                    piece = Pawn.new(:w, self, pos)
+                    piece = Pawn.new(:white, self, pos)
                     add_piece(piece, pos)
                 end
             end
@@ -42,17 +42,17 @@ class Board
             if i == 7
                 row.each_with_index do |square, j|
                     pos = [i, j]
-                    piece = Rook.new(:b, self, pos) if j == 0 || j == 7
-                    piece = Knight.new(:b, self, pos) if j == 1 || j == 6
-                    piece = Bishop.new(:b, self, pos) if j == 2 || j == 5
-                    piece = Queen.new(:b, self, pos) if j == 3
-                    piece = King.new(:b, self, pos) if j == 4
+                    piece = Rook.new(:blue, self, pos) if j == 0 || j == 7
+                    piece = Knight.new(:blue, self, pos) if j == 1 || j == 6
+                    piece = Bishop.new(:blue, self, pos) if j == 2 || j == 5
+                    piece = Queen.new(:blue, self, pos) if j == 3
+                    piece = King.new(:blue, self, pos) if j == 4
                     add_piece(piece, pos)
                 end
             elsif i == 6
                 row.each_with_index do |square, j|
                     pos = [i, j]
-                    piece = Pawn.new(:b, self, pos)
+                    piece = Pawn.new(:blue, self, pos)
                     add_piece(piece, pos)
                 end
             end
@@ -114,6 +114,37 @@ class Board
 
         piece.pos = end_pos
         end_piece.pos = start_pos
+    end
+
+    def in_check?(color)
+        opp_pieces = pieces.select { |piece| piece.color != color}
+        king_pos = find_king(color)
+
+        opp_pieces.each do |piece|
+            p "You're in DANGER!"
+            return true if piece.moves.include?(king_pos)
+        end
+
+        false
+    end
+
+    def pieces
+        pieces = []
+        grid.each_with_index do |row, i|
+            row.each_with_index do |piece, j|
+                pieces << piece if !piece.is_a?(NullPiece)
+            end
+        end
+        pieces
+    end
+
+    def find_king(color)
+        king_pos = []
+        grid.each_with_index do |row, i|
+            row.each_with_index do |piece, j|
+                king_pos = [i, j] if piece.is_a?(King) && piece.color == color
+            end
+        end
     end
 end
 

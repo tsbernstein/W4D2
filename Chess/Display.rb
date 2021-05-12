@@ -18,7 +18,7 @@ attr_reader :cursor , :board
         board.grid.each_with_index do |row, i|
             # p i
             row.each_with_index do |piece , j|
-                print " #{piece.symbol}" 
+                print " #{piece.symbol.to_s.colorize(piece.color)}" 
             end 
             puts
         end 
