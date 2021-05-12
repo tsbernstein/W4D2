@@ -4,7 +4,7 @@ class Knight < Piece
     include Steppable
 
     def symbol
-        :Kt
+        :k
     end
 
     def move_dirs

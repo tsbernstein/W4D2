@@ -52,7 +52,7 @@ class Board
             elsif i == 6
                 row.each_with_index do |square, j|
                     pos = [i, j]
-                    piece = Pawn.new(:w, self, pos)
+                    piece = Pawn.new(:b, self, pos)
                     add_piece(piece, pos)
                 end
             end
@@ -117,7 +117,7 @@ class Board
     end
 end
 
-b = Board.new
+# b = Board.new
 # # p b
 # b.move_piece([6,0], [5,0])
 # p b

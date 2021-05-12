@@ -4,7 +4,7 @@ class King < Piece
     include Steppable
 
     def symbol
-        :Kg
+        :K
     end
 
     def move_dirs

@@ -1,5 +1,7 @@
 require_relative './require.rb'
+require_relative './board.rb'
 require "io/console"
+require 'byebug'
 
 KEYMAP = {
   " " => :space,
@@ -39,6 +41,7 @@ class Cursor
     @cursor_pos = cursor_pos
     @board = board
     @toggle = false
+
   end
 
   def get_input
@@ -78,14 +81,17 @@ class Cursor
   end
 
   def handle_key(key)
-    case KEYMAP[key]
+    # debugger
+    case key
 
-    when :left || :right || :up || :down 
-        update_pos(MOVE[key])
+    when :left , :right , :up , :down 
+        # debugger
+        update_pos(MOVES[key])
         nil
-    when :return || :space
-        @cursor_pos
+    when :return , :space
+        # debugger
         toggle
+        @cursor_pos
     when :ctrl_c
         Process.exit(0)
     end
@@ -95,9 +101,8 @@ class Cursor
     @toggle = !@toggle
   end
 
-  def update_pos(diff)
-    dx, dy = diff[0], diff[1]
+  def update_pos(diff)    dx, dy = diff[0], diff[1]
     x, y = cursor_pos[0] , cursor_pos[1]
-    @cursor_pos = [x + dx , y + dy] if COORDINATES.include?([x + dx , y + dy])
+    p @cursor_pos = [x + dx , y + dy] if Board::COORDINATES.include?([x + dx , y + dy])
   end
 end
