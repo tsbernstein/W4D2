@@ -46,7 +46,7 @@ module Slidable
             x += dx
             y += dy
 
-            break if !valid_moves.include?([x, y])
+            break if !board.valid_position?([x, y])
             break if board[x, y].color == color
             if board[x,y].color != color 
                 pos_moves << [x,y]
@@ -54,6 +54,7 @@ module Slidable
             elsif board[x, y].empty?
                 pos_moves << [x,y]
             end 
+            stop_loop = false
         end 
         pos_moves
     end
