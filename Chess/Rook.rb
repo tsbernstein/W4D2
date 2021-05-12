@@ -1,5 +1,7 @@
+require_relative 'slidable'
+require_relative 'Piece'
 class Rook < Piece
-    include module Slidable
+    include Slidable
 
     def symbol
         :R

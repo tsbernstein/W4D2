@@ -1,3 +1,4 @@
+require_relative './require.rb'
 require "io/console"
 
 KEYMAP = {
@@ -37,7 +38,7 @@ class Cursor
   def initialize(cursor_pos, board)
     @cursor_pos = cursor_pos
     @board = board
-
+    @toggle = false
   end
 
   def get_input
@@ -84,14 +85,19 @@ class Cursor
         nil
     when :return || :space
         @cursor_pos
+        toggle
     when :ctrl_c
         Process.exit(0)
+    end
+  end
 
+  def toggle
+    @toggle = !@toggle
   end
 
   def update_pos(diff)
     dx, dy = diff[0], diff[1]
     x, y = cursor_pos[0] , cursor_pos[1]
-    @cursor_pos = [x + dx , y + dy]
+    @cursor_pos = [x + dx , y + dy] if COORDINATES.include?([x + dx , y + dy])
   end
 end

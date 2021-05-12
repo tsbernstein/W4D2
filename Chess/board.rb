@@ -1,4 +1,5 @@
-require_relative "require.rb"
+require_relative "./require.rb"
+require 'byebug'
 
 class Board
 
@@ -16,7 +17,7 @@ class Board
 
     def white_pieces
         @grid.each_with_index do |row, i|
-            if i == 0 || i == 1
+            if i == 0
                 row.each_with_index do |square, j|
                     pos = [i, j]
                     piece = Rook.new(:w, self, pos) if j == 0 || j == 7
@@ -26,13 +27,19 @@ class Board
                     piece = King.new(:w, self, pos) if j == 4
                     add_piece(piece, pos)
                 end
+            elsif i == 1
+                row.each_with_index do |square, j|
+                    pos = [i, j]
+                    piece = Pawn.new(:w, self, pos)
+                    add_piece(piece, pos)
+                end
             end
         end
     end 
 
     def black_pieces
         @grid.each_with_index do |row, i|
-            if i == 6 || i == 7
+            if i == 7
                 row.each_with_index do |square, j|
                     pos = [i, j]
                     piece = Rook.new(:b, self, pos) if j == 0 || j == 7
@@ -40,6 +47,12 @@ class Board
                     piece = Bishop.new(:b, self, pos) if j == 2 || j == 5
                     piece = Queen.new(:b, self, pos) if j == 3
                     piece = King.new(:b, self, pos) if j == 4
+                    add_piece(piece, pos)
+                end
+            elsif i == 6
+                row.each_with_index do |square, j|
+                    pos = [i, j]
+                    piece = Pawn.new(:w, self, pos)
                     add_piece(piece, pos)
                 end
             end
@@ -51,7 +64,7 @@ class Board
             unless i == 0 || i == 1 || i == 6 || i == 7
                 row.each_with_index do |square, j|
                     pos = [i, j]
-                    piece = NullPiece.new
+                    piece = NullPiece.instance
                     add_piece(piece, pos)
                 end
             end
@@ -104,7 +117,7 @@ class Board
     end
 end
 
-# b = Board.new
+b = Board.new
 # # p b
 # b.move_piece([6,0], [5,0])
 # p b

@@ -1,3 +1,4 @@
+# require_relative './require.rb'
 module Slidable
     private
     HORIZONTAL_DIRS = [

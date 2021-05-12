@@ -1,5 +1,5 @@
 require 'singleton'
-require 'require'
+require_relative './require.rb'
 
 
 class NullPiece < Piece

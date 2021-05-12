@@ -1,4 +1,4 @@
-
+require_relative 'Piece'
 class Pawn < Piece
     attr_reader :symbol 
 

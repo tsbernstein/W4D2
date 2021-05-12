@@ -1,5 +1,7 @@
+require_relative 'slidable'
+require_relative 'Piece'
 class Bishop < Piece
-    include module Slidable
+    include Slidable
 
     def symbol
         :B

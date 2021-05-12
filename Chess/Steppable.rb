@@ -1,3 +1,4 @@
+# require_relative './require.rb'
 module Steppable
     private
     KNIGHT_DIRS = [

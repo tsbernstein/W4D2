@@ -1,5 +1,7 @@
+require_relative 'Steppable'
+require_relative 'Piece'
 class King < Piece
-    include module Steppable
+    include Steppable
 
     def symbol
         :Kg

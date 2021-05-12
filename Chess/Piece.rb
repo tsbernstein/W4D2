@@ -1,4 +1,4 @@
-require_relative "require"
+# require_relative 'require.rb'
 
 class Piece
     attr_reader :color, :board
@@ -17,7 +17,6 @@ class Piece
     def valid_moves
         
     end
-
 
 end 
 
