@@ -24,8 +24,14 @@ module Slidable
     end 
 
     def moves
+        pos_moves = []
         if moves_dirs == "horizontal"
-            horizontal_dirs
+            horizontal_dirs.each do |move|
+                pos = self.pos
+                new_pos = [move[0] + pos[0] , move[1] + pos[1]]
+                pos_moves << [new_pos] if self.valid_moves.include?(new_pos)
+            end 
+
         elsif
             moves_dirs == "diagonal"
             diagonal_dirs

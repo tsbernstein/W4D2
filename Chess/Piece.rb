@@ -16,7 +16,7 @@ class Piece
     end
 
     def valid_moves
-        COORDINATES
+        (0...8).to_a.product((0...8).to_a)
     end
 
 
