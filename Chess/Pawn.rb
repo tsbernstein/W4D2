@@ -2,10 +2,9 @@
 class Pawn < Piece
     attr_reader :symbol 
 
-    def initialize
-        @symbol = :p
-        super
-    end 
+    def symbol
+        :p
+    end
 
     def moves
 
@@ -38,8 +37,6 @@ class Pawn < Piece
             pos_side_attacks << [pos[0] - 1 , pos[1] + 1]
             pos_side_attacks << [pos[0] - 1 , pos[1] - 1]
         end 
-
     end 
-
 end
 

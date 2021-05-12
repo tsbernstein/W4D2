@@ -19,7 +19,11 @@ class Board
             if i == 0 || i == 1
                 row.each_with_index do |square, j|
                     pos = [i, j]
-                    piece = Piece.new(:w, self, pos)
+                    piece = Rook.new(:w, self, pos) if j == 0 || j == 7
+                    piece = Knight.new(:w, self, pos) if j == 1 || j == 6
+                    piece = Bishop.new(:w, self, pos) if j == 2 || j == 5
+                    piece = Queen.new(:w, self, pos) if j == 3
+                    piece = King.new(:w, self, pos) if j == 4
                     add_piece(piece, pos)
                 end
             end
@@ -31,7 +35,11 @@ class Board
             if i == 6 || i == 7
                 row.each_with_index do |square, j|
                     pos = [i, j]
-                    piece = Piece.new(:b, self, pos)
+                    piece = Rook.new(:b, self, pos) if j == 0 || j == 7
+                    piece = Knight.new(:b, self, pos) if j == 1 || j == 6
+                    piece = Bishop.new(:b, self, pos) if j == 2 || j == 5
+                    piece = Queen.new(:b, self, pos) if j == 3
+                    piece = King.new(:b, self, pos) if j == 4
                     add_piece(piece, pos)
                 end
             end
@@ -43,7 +51,7 @@ class Board
             unless i == 0 || i == 1 || i == 6 || i == 7
                 row.each_with_index do |square, j|
                     pos = [i, j]
-                    piece = NullPiece.new(:n, self, pos)
+                    piece = NullPiece.new
                     add_piece(piece, pos)
                 end
             end
@@ -76,17 +84,23 @@ class Board
     # end
 
     # need to write a catch method so user can re-input move
-    def move_piece(start_pos, end_pos)
+    def move_piece(color, start_pos, end_pos)
+
+
         piece = self[start_pos]
         end_piece = self[end_pos]
+
+
         raise ArgumentError.new "No piece at position" if empty?(start_pos)
-        raise ArgumentError.new "Not a valid end position" if !COORDINATES.include?(end_pos)
+        raise ArgumentError.new "Not a valid end position" if !valid_position?(end_pos)
+
+
         self[end_pos] = piece
         self[start_pos] = end_piece
         
+
         piece.pos = end_pos
         end_piece.pos = start_pos
-
     end
 end
 
